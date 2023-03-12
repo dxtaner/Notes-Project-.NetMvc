@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Note>
+<style>
+</style>
+@{
+    List<Note> topLevelNotes = Model.Where(n => n.ParentId == null).ToList();
+
+    string RenderNotes(List<Note> notes)
+    {
+        string result = "";
+        foreach (var note in notes)
+        {
+            result += "<li data-note-id='" + note.Id + "'><h3>" + note.Title + "</h3><form method='post' action='" +
+            Url.Action("Delete", new { id = note.Id }) + "'><button type='submit'>Sil</button></form><p>" +
+            note.Content + "</p>";
+            if (Model.Any(n => n.ParentId == note.Id))
+            {
+                result += "<ul>" + RenderNotes(Model.Where(n => n.ParentId == note.Id).ToList()) + "</ul>";
+            }
+            result += "</li>";
+        }
+        return result;
+    }
+}
+
+<ul>
+    @Html.Raw(RenderNotes(topLevelNotes))
+</ul>
+
+<a asp-action="Create">Yeni Not Ekleyin</a>
