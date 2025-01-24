@@ -1,25 +1,21 @@
-Notes Project
-==============
+# Notes Project
 
-Kurulum
--------
+## Installation
 
-1.  \`HomeController\` sınıfını projenize ekleyin.
-2.  Bağımlılıklarınızı doğru şekilde yönetmek için gerekli NuGet paketlerini yükleyin.
-3.  \`NoteContext\` sınıfının veritabanı bağlantısını yapılandırın.
+1. Add the `HomeController` class to your project.
+2. Install the necessary NuGet packages to manage dependencies properly.
+3. Configure the database connection in the `NoteContext` class.
 
-Özellikler
-----------
+## Features
 
-*   `Index` metodu, veritabanındaki tüm notları alır ve bir görünüme ileterek kullanıcıya gösterir.
-*   `Create` metodu, yeni bir not oluşturmak için HTTP GET isteğini işler ve oluşturma formunu kullanıcıya gösterir. Ayrıca tüm notları içeren bir `SelectList` nesnesini görünüme iletir.
-*   `Create` metodu, yeni bir not oluşturmak için HTTP POST isteğini işler. Eğer gelen veriler geçerliyse, notu veritabanına ekler ve ilgili yönlendirmeyi yapar. Geçerli veriler yoksa, oluşturma formunu hatalarla birlikte tekrar gösterir.
-*   `Delete` metodu, belirtilen bir notu silmek için HTTP POST isteğini işler. Silinecek notu veritabanından bulur, alt notlarıyla birlikte siler ve ilgili yönlendirmeyi yapar.
-*   `MoveChildNotes` metodu, silinen bir notun altındaki notları üst notun altına taşır.
+- The `Index` method retrieves all notes from the database and passes them to a view for display to the user.
+- The `Create` method handles HTTP GET requests to create a new note and displays a creation form to the user. It also passes a `SelectList` object containing all notes to the view.
+- The `Create` method handles HTTP POST requests to create a new note. If the submitted data is valid, it adds the note to the database and performs the necessary redirection. If the data is invalid, it redisplays the creation form with errors.
+- The `Delete` method handles HTTP POST requests to delete a specified note. It finds the note in the database, deletes it along with its child notes, and performs the necessary redirection.
+- The `MoveChildNotes` method moves the child notes of a deleted note under the parent note.
 
-Kullanım
---------
+## Usage
 
-1.  `Index` metodu, uygulamanın ana sayfasında tüm notları görüntülemek için kullanılır.
-2.  `Create` metodu, yeni bir not oluşturmak için kullanılır. Bu metot, bir HTTP GET isteği ile çağrıldığında not oluşturma formunu gösterir ve bir HTTP POST isteği ile çağrıldığında yeni notu kaydeder.
-3.  `Delete` metodu, belirtilen bir notu silmek için kullanılır. Silinecek notun kimliği `id` parametresi olarak alınır.
+1. The `Index` method is used to display all notes on the main page of the application.
+2. The `Create` method is used to create a new note. It displays the note creation form when called with an HTTP GET request and saves the new note when called with an HTTP POST request.
+3. The `Delete` method is used to delete a specified note. The ID of the note to be deleted is passed as the `id` parameter.
